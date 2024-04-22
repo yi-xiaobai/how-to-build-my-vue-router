@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>history</title>
+  </head>
+  <body>
+    <ul>
+      <li>
+        <a href="/home">home</a>
+      </li>
+      <li>
+        <a href="/about">about</a>
+      </li>
+
+      <div id="routerView"></div>
+    </ul>
+  </body>
+
+  <script>
+    let routerView;
+
+    window.addEventListener("DOMContentLoaded", onLoad);
+    function onLoad() {
+      routerView = document.querySelector("#routerView");
+      //   onPopState();
+      routerView.innerHTML = location.pathname;
+
+      // 获取所有的a标签
+      const linkList = document.querySelectorAll("a[href]");
+      console.log("==>Get linkList", linkList);
+      linkList.forEach((el) =>
+        el.addEventListener("click", (e) => {
+          e.preventDefault();
+          history.pushState({}, "", el.getAttribute("href"));
+          routerView.innerHTML = location.pathname;
+        })
+      );
+    }
+  </script>
+</html>

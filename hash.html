@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hash</title>
+  </head>
+  <body>
+    <ul>
+      <li>
+        <a href="#/home">home</a>
+      </li>
+      <li>
+        <a href="#/about">about</a>
+      </li>
+
+      <div id="routerView"></div>
+    </ul>
+  </body>
+
+  <script>
+    // 页面加载完成不会主动处罚hashchange事件 在这里主动触发一次
+    window.addEventListener("DOMContentLoaded", onLoad);
+
+    window.addEventListener("hashchange", onHashChange);
+
+    let routerView;
+
+    function onLoad() {
+      //   onHashChange();
+      routerView = document.querySelector("#routerView");
+      if (!location.hash) {
+        location.hash = "#/";
+      } else {
+        routerView.innerHTML = location.hash;
+      }
+    }
+
+    function onHashChange() {
+      console.log("==>Get location", location);
+      switch (location.hash) {
+        case "#/":
+          routerView.innerHTML = "#/";
+          break;
+        case "#/home":
+          routerView.innerHTML = "#/home";
+          break;
+        case "#/about":
+          routerView.innerHTML = "#/about";
+          break;
+
+        default:
+          break;
+      }
+    }
+  </script>
+</html>
